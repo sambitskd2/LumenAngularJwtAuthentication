@@ -1,0 +1,77 @@
+<div class="container mt-4">
+  <header class="bg-dark text-white p-2 mb-2 text-center">
+    <h1>Rgister</h1>
+  </header>
+
+  <form (submit)="submit()" [formGroup]="form">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        name="name"
+        id=""
+        class="form-control"
+        placeholder="Enter Name"
+        formControlName="name"
+        [ngClass]="{'is-invalid': submitted && f['name'].errors}"
+      />
+
+      <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+        <div *ngIf="f['name'].errors['required']">Name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">email</label>
+      <input
+        type="text"
+        name="email"
+        id=""
+        class="form-control"
+        placeholder="Enter email"
+        formControlName="email"
+        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+      />
+      <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+        <div *ngIf="f['email'].errors['required']">Name is required</div>
+        <div *ngIf="f['email'].errors['email']">Enter valid email</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">password</label>
+      <input
+        type="text"
+        name="password"
+        id=""
+        class="form-control"
+        placeholder="Enter password"
+        formControlName="password"
+        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+      />
+      <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+        <div *ngIf="f['password'].errors['required']">password is required</div>
+        <div *ngIf="f['password'].errors['minLength']">password must be 6 char</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirm password</label>
+      <input
+        type="text"
+        name="confirmPassword"
+        id=""
+        class="form-control"
+        formControlName="confirmPassword"
+        placeholder="Enter Confirm password"
+        [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+      />
+      <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+        <div *ngIf="f['confirmPassword'].errors['required']">
+          Confirm password is required
+        </div>
+        <div *ngIf="f['confirmPassword'].errors['mustMatch']">
+          Password must match
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-secondary mt-4 btn-sm">Submit</button>
+  </form>
+</div>
