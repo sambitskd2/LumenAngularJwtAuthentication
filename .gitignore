@@ -47,5 +47,5 @@ Homestead.json
 Homestead.yaml
 .env
 .phpunit.result.cache
-customerApp/src/environments/environment.ts
-customerApp/src/environments/environment.ts
+src/environments/environment.ts
+src/environments/environment.ts

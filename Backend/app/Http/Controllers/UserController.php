@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    
+
     public function register(Request $request)
     {
         $userExist = DB::table('users')->where("email", $request->email)->exists();
@@ -23,7 +23,9 @@ class UserController extends Controller
             "email" => $request->email,
             "password" => Hash::make($request->password),
         ]);
-        return $this->responseHandler("User created successfully😎", 201, true);
+        if ($newUser)
+            return $this->responseHandler("User created successfully😎", 201, true);
+        else   return $this->responseHandler("Something went wrong.😬", 409, false);
     }
 
 
@@ -32,7 +34,8 @@ class UserController extends Controller
     {
         return response()->json([
             "message" => $message,
-            "success" => $successStatus
-        ], $statusCode);
+            "success" => $successStatus,
+            "code" => $statusCode
+        ], 200);
     }
 }

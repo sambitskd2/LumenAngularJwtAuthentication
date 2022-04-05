@@ -8,6 +8,6 @@ export function MustMatch(controlName: string, matchingControlName: string) {
     if (matchingControl.errors && !matchingControl.errors['mustMatch']) return;
     if (control.value !== matchingControl.value)
       matchingControl.setErrors({ mustMatch: true });
-    else matchingControl.setErrors({ mustMatch: false });
+    else matchingControl.setErrors(null);
   };
 }
