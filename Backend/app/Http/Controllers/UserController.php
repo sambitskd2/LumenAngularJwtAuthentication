@@ -27,8 +27,31 @@ class UserController extends Controller
             return $this->responseHandler("User created successfully😎", 201, true);
         else   return $this->responseHandler("Something went wrong.😬", 409, false);
     }
+    public function login()
+    {
+        $credentials = request(['email', 'password','name']);
+        $customClaims = ['foo' => 'bar', 'baz' => 'bob'];
 
+        if (!$token = auth()->attempt($credentials,$customClaims))
+            return response()->json([
+                'message' => 'Unauthorized',
+                'code' => 401
+            ], 200);
 
+        return $this->respondWithToken($token);
+    }
+
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'success' => true,
+            "message" => 'Login Successfull',
+            'code' => 200
+        ], 200);
+    }
 
     private function responseHandler($message, $statusCode, $successStatus)
     {

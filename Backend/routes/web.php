@@ -18,6 +18,9 @@ $router->get('/', function () use ($router) {
 });
 
 $router->post('register', 'UserController@register');
+$router->post('login', 'UserController@login');
+
+
 
 $router->group([
 
@@ -29,3 +32,4 @@ $router->group([
     $router->post('refresh', 'AuthController@refresh');
     $router->get('user-profile', 'AuthController@me');
 });
+ 
